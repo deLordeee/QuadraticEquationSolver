@@ -8,6 +8,11 @@ public class QuadraticEquationSolver {
     public static void main(String[] args) {
         if (args.length == 0) {
             interactiveMode();
+        } else if (args.length == 1) {
+            fileMode(args[0]);
+        } else {
+            System.out.println("Usage: java QuadraticEquationSolver [file_path]");
+            System.exit(1);
         }
     }
 
@@ -40,7 +45,57 @@ public class QuadraticEquationSolver {
         }
     }
 
+    private static void fileMode(String filePath) {
+        File file = new File(filePath);
 
+        if (!file.exists()) {
+            System.out.println("file " + filePath + " does not exist");
+            System.exit(1);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line = reader.readLine();
+
+            // Check if there's another line (there shouldn't be more than one)
+            if (reader.readLine() != null) {
+                System.out.println("invalid file format");
+                System.exit(1);
+            }
+
+            if (line == null) {
+                System.out.println("invalid file format");
+                System.exit(1);
+            }
+
+            String[] parts = line.trim().split("\\s+");
+            if (parts.length != 3) {
+                System.out.println("invalid file format");
+                System.exit(1);
+            }
+
+            double a, b, c;
+            try {
+                a = Double.parseDouble(parts[0]);
+                b = Double.parseDouble(parts[1]);
+                c = Double.parseDouble(parts[2]);
+            } catch (NumberFormatException e) {
+                System.out.println("invalid file format");
+                System.exit(1);
+                return; // Unreachable but needed for compiler
+            }
+
+            if (a == 0) {
+                System.out.println("Error. a cannot be 0");
+                System.exit(1);
+            }
+
+            solveAndPrintEquation(a, b, c);
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+            System.exit(1);
+        }
+    }
 
     private static void solveAndPrintEquation(double a, double b, double c) {
         System.out.println("Equation is: (" + a + ") x^2 + (" + b + ") x + (" + c + ") = 0");
