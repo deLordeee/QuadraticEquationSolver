@@ -66,5 +66,9 @@ java QuadraticEquationSolver input.txt
 
 Це відповідає рівнянню `1x^2 - 3x + 2 = 0`.
 
+---
 
+## Revert-коміт
+
+[Revert commit](https://github.com/deLordeee/QuadraticEquationSolver/commit/4488680)
 
