@@ -56,7 +56,7 @@ public class QuadraticEquationSolver {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
 
-            // Check if there's another line (there shouldn't be more than one)
+            
             if (reader.readLine() != null) {
                 System.out.println("invalid file format");
                 System.exit(1);
@@ -81,7 +81,7 @@ public class QuadraticEquationSolver {
             } catch (NumberFormatException e) {
                 System.out.println("invalid file format");
                 System.exit(1);
-                return; // Unreachable but needed for compiler
+                return; 
             }
 
             if (a == 0) {
@@ -103,19 +103,19 @@ public class QuadraticEquationSolver {
         double discriminant = b * b - 4 * a * c;
 
         if (discriminant > 0) {
-            // Two distinct real roots
+           
             double x1 = (-b - Math.sqrt(discriminant)) / (2 * a);
             double x2 = (-b + Math.sqrt(discriminant)) / (2 * a);
             System.out.println("There are 2 roots");
             System.out.println("x1 = " + x1);
             System.out.println("x2 = " + x2);
         } else if (discriminant == 0) {
-            // One real root (repeated)
+           
             double x = -b / (2 * a);
             System.out.println("There are 1 roots");
             System.out.println("x1 = " + x);
         } else {
-            // No real roots
+          
             System.out.println("There are 0 roots");
         }
     }
